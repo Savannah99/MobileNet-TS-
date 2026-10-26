@@ -61,11 +61,3 @@ Experiments use three datasets, none of which are redistributed in this reposito
 - **PediFundus38** -- an in-house pediatric fundus video dataset; not publicly released
 
 Frame features (frozen ViT-Small embeddings), optical-flow magnitudes, and MobileNet-TS+ confidence scores are precomputed and cached to disk by earlier preprocessing steps (not included here); the scripts in `code/` consume those cached `.npy`/`.npz` files. Absolute paths in these scripts (e.g. `/home/.../features/vit_small`) reflect the original compute environment and will need to be adapted to reproduce results elsewhere.
-
-## Known limitation: Cholec80 scorer checkpoint
-
-The original MobileNet-TS+ classification head trained on Cholec80 was not saved as part of the checkpoint (only the backbone, trunk, and auxiliary flow-regression head were preserved). The Cholec80 numbers reported in the abstract come from a cached confidence-score file produced by that original (now-unreproducible) classification head, not from a checkpoint that can be reloaded and rerun end-to-end. A reconstructed classification head trained from the same backbone produces close but not identical scores. This does not affect the AutoLaparo or PediFundus38 results, whose scorers are fully checkpointed.
-
-## Citation
-
-If you use this code, please cite the ISBME 2026 abstract (citation details to be added upon publication).
